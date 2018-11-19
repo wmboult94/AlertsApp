@@ -1,27 +1,28 @@
 <!-- Single alert component -->
 
 <template>
-	<div id='alert'>
-		<h2>Alert Heading</h2>
-		<div id='description'>
-			Description: {{description}}
+	<li>
+		<div id='alert'>
+			<h2>{{alert.company}} - {{alert.product}}</h2>
+			<div id='description'>
+				<strong>Details:</strong> {{alert.title}}
+			</div>
+			<div id='dataset'>
+				<strong>Date posted:</strong> {{alert.date}}
+			</div>
 		</div>
-		<div id='dataset'>
-			Date posted: {{date}}
-		</div>
-	</div>
+	</li>
 </template>
 
 <script>
 export default {
 	name: 'Alert',
-	data () {
-		return {
-			description: 'Add description',
-			date: '19 November 2018',
-			advice: '',
+	props: {
+		alert: { // alert will hold the info about the alert
+			type: Object,
+			required: true
 		}
-	}
+	},
 }
 </script>
 

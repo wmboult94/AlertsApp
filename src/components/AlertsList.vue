@@ -4,9 +4,10 @@
 	<div id='alerts-list'>
 		<div>
 			<ul>
-				<li v-for='user in users'>
-					<Alert/>
-				</li>
+				<Alert
+					v-for='alert, index in alerts'
+					:alert='alert'
+					@click.native='clickItem(index)'/>
 			</ul>
 		</div>
 	</div>
@@ -20,17 +21,35 @@ export default {
 	components: {
 		Alert
 	},
-	data () {
-		return {
-			users: [
-				{firstname: 'Sebastian', lastname: 'Eschweiler'},
-				{firstname: 'Bill', lastname: 'Smith'},
-				{firstname: 'John', lastname: 'Porter'}
-			],
-			input_val: '',
-			counter: 0,
-		}
-	}
+	data() {
+
+		let alerts = []
+		fetch('https://data.food.gov.uk/food-alerts/id?_limit=10')
+		.then(response => response.json())
+		.then(data => {
+			// console.log(data['items'])
+			return data['items'].map(item => {
+				// console.log(item)
+				let item_obj = {
+					id: item['notation'],
+					title: item['shortTitle'],
+					date: item['created'],
+					product: item['productDetails'][0]['productName'],
+					company: item['reportingBusiness']['commonName'],
+					clicked: false
+				}
+
+				console.log(item_obj)
+				alerts.push(item_obj)
+			})
+
+			// console.log(items)
+			// alerts.push(items)
+
+		})
+		// console.log(alerts)
+		return { alerts }
+	},
 }
 </script>
 
