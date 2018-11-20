@@ -1,13 +1,33 @@
 <!-- Single alert component -->
 
 <template>
-	<li>
-		<div id='alert'>
+	<li id='alert'>
+		<div v-if='alert.clicked && alert.pulledExtra'>
 			<h2>{{alert.company}} - {{alert.product}}</h2>
-			<div id='description'>
+			<div>
+				<p>
+					<strong>Full info:</strong> {{alert.longText}}
+				</p>
+				<p>
+					<strong>Advice:</strong> {{alert.advice}}
+				</p>
+				<p v-if='alert.allergens.length'>
+					<strong>Allergens:</strong>
+					<p v-for='allergen in alert.allergens'>
+						{{allergen}}
+					</p>
+				</p>
+			</div>
+			<div>
+				<strong>Date posted:</strong> {{alert.date}}
+			</div>
+		</div>
+		<div v-else>
+			<h2>{{alert.company}} - {{alert.product}}</h2>
+			<div>
 				<strong>Details:</strong> {{alert.title}}
 			</div>
-			<div id='dataset'>
+			<div>
 				<strong>Date posted:</strong> {{alert.date}}
 			</div>
 		</div>
@@ -32,9 +52,15 @@ export default {
 	margin: 50px;
 	border-style: groove;
 	width: inherit;
+	cursor: pointer;
+	background: #e0ebeb;
+	/* background: black; */
+	border-radius: 25px;
+	padding: 2%
 }
 h1, h2 {
-	font-weight: normal;
+	font-weight: bold;
+	font-style: normal;
 }
 ul {
 	list-style-type: none;
@@ -43,10 +69,7 @@ ul {
 li {
 	display: block;
 	margin: 0 10px;
-	color: #42b983;
+	color: #4d4dff;
 	font-style: italic;
-}
-a {
-	color: #42b983;
 }
 </style>

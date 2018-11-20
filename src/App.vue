@@ -24,12 +24,13 @@ export default {
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	text-align: center;
-	color: #2c3e50;
-	margin-top: 60px;
+	color: #ff1a1a;
+	/* font-weight: bold; */
+	background: #1a1aff;
 }
-
 h1 {
 	font-weight: normal;
 	font-size: 50px;
+	padding: 2%;
 }
 </style>
